@@ -4,15 +4,14 @@ This is a PowerShell script to check DFS replication on domain controlers. I was
 
 Status codes for DFS are below.
 
-0
-Uninitialized
-1	Initialized
-2	Initial synchronization
-3	Auto recovery
-4	Normal
-5	In error state
-6	Disabled
-7	Unknown
+0 Uninitialized,
+1	Initialized,
+2	Initial synchronization,
+3	Auto recovery,
+4	Normal,
+5	In error state,
+6	Disabled,
+7	Unknown,
  
 
  Change the below variable with list of AD domain's to be checked.
