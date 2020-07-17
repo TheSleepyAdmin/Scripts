@@ -19,7 +19,7 @@ $AllGpos = Get-GPO -All -Domain $domain
 foreach ($Gpo in $AllGpos) {
 
 ## typecast XML results
-[xml]$GpoReportXml = Get-GPOReport -Guid $Gpo.ID -ReportType xml
+[xml]$GpoReportXml = Get-GPOReport -Guid $Gpo.ID -ReportType xml -Domain $domain
 
 ## set GP assigned variable
 if (-not $GpoReportXml.GPO.LinksTo) {
