@@ -28,7 +28,7 @@ if ($Acl.IdentityReference -notlike "BUILTIN\Administrators" -and $Acl.IdentityR
 $Acl.IdentityReference -notlike "NT AUTHORITY\SYSTEM" -and $Acl.FileSystemRights -notlike "-*" -and  $Acl.FileSystemRights -notlike "268435456"`
 -and $Acl.IdentityReference -notlike "S-1-*"){
 
-## formate properties for result hash table
+## format properties for result hash table
 $properties = @{
 FolderName = $Folder.Name
 FolderPath = $Folder.FullName
