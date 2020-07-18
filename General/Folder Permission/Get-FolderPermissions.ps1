@@ -3,7 +3,7 @@ param(
 [parameter(Mandatory = $true)]
 [String]$FolderPath,
 [parameter(Mandatory = $true)]
-[String]$ExpotPath
+[String]$ExportPath
 )
 
 ## Results variable
@@ -15,7 +15,11 @@ $Folders = Get-ChildItem -Path $FolderPath -Directory |  Select-Object Name,Full
 foreach ($err in $Error) {
 $err.Exception.Message | Out-File $ExportPath\AccessDenied.txt -Append
 }
+
+## Loop through folders
 foreach ($Folder in $Folders){
+
+## Get Size of each folder
 $size = ((Get-ChildItem -Path $Folder.FullName -Recurse | Measure-Object -Property Length -Sum -ErrorAction SilentlyContinue).Sum / 1MB)
 
 ## Get access control list
@@ -28,7 +32,7 @@ if ($Acl.IdentityReference -notlike "BUILTIN\Administrators" -and $Acl.IdentityR
 $Acl.IdentityReference -notlike "NT AUTHORITY\SYSTEM" -and $Acl.FileSystemRights -notlike "-*" -and  $Acl.FileSystemRights -notlike "268435456"`
 -and $Acl.IdentityReference -notlike "S-1-*"){
 
-## formate properties for result hash table
+## format properties for result hash table
 $properties = @{
 FolderName = $Folder.Name
 FolderPath = $Folder.FullName
@@ -46,4 +50,4 @@ $results += New-Object psobject -Property $properties
 
 ## Export results
 $results | Select-Object FolderName,FolderPath,IdentityReference,Size,Permissions,AccessControlType,IsInherited | 
-Export-Csv -Path $ExportPath\Permission.csv -Append -NoTypeInformation
+Export-Csv -Path $ExportPath\PermissionExport.csv -Append -NoTypeInformation
