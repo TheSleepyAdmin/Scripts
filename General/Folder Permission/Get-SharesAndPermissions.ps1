@@ -1,7 +1,6 @@
 <#
 .SYNOPSIS
 Script to list all share on a remote system and export folder permission
-
 .DESCRIPTION
 This Script is used to check for all shares on the specified servers and to export folder permission, the default shares like Admin$ and c$ 
 are excluded from this script. 
@@ -79,4 +78,4 @@ $results += New-Object psobject -Property $properties
     }
 ## Export results
 $results | Select-Object FolderName,FolderPath,IdentityReference,Permissions,AccessControlType,IsInherited | 
-Export-Csv -Path $ExportPath\Share_PermissionExport.csv -Append -NoTypeInformation
+Export-Csv -Path $ExportPath\Share_PermissionExport.csv -NoTypeInformation
