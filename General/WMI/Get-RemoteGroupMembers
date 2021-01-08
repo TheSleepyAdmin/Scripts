@@ -15,10 +15,10 @@ Parameter that specifies the path that csv will be exported to
 Parameter to set what groups will be checked
 
 .EXAMPLE
-.\Get-RemoteGroupMembers -CompList c:\Temp\Comps.txt c:\Temp\Results -groups "Administrators"
+Get-RemoteGroupMembers -CompList c:\Temp\Comps.txt c:\Temp\Results -groups "Administrators"
 
 .EXAMPLE
-.\Get-RemoteGroupMembers -CompList .\Comps.txt -exportPath .\ -groups "Administrators","Remote Desktop Users"
+Get-RemoteGroupMembers -CompList .\Comps.txt -exportPath .\ -groups "Administrators","Remote Desktop Users"
 
 .NOTES
 
@@ -44,10 +44,9 @@ $results = @()
 foreach ($comp in $comps){
 
 ## Check connection to device
-try {
-$tc = Test-Connection -ComputerName $comp -Count 1 -Quiet 
+$tc = Test-Connection -ComputerName $comp -Count 1 -Quiet
+if ($tc -eq $true){
 
-if($tc -eq $true){
 
 ## Loop through groups
 foreach ($group in $groups){
@@ -93,10 +92,12 @@ $results += New-Object psobject -Property $props
         }
     }
 }
-$results | Export-csv -Path $exportPath\Remote_GroupExport_$date.csv -NoTypeInformation
-    }
-catch {
+else{
 
-Write-Warning "$comp is not responding "
+Write-Host "$comp is not responding " -ForegroundColor Red
     }
 }
+
+$results | Export-csv -Path $exportPath\Remote_GroupExport_$date.csv -NoTypeInformation
+$results
+Write-Host "Report has been Exported to $($exportPath)" -ForegroundColor Green
