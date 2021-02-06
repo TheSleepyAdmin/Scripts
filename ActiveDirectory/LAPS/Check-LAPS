@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-LAPS script for checking remote doamin
+LAPS script for checking remote doamin and local domains
 
 .DESCRIPTION
 This script can be used for checking the local admin passwrod attribute on local and remote domain. This script will work without the
@@ -21,7 +21,7 @@ need to install any addtional modules. There are two mandartory parramter requir
     )
 function Check-LAPS {
 
-## Get domain deatils to be called in adsiserach
+## Get domain details to be called in adsiserach
 $domContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext("Domain", $domName)
 $LDAP= [System.DirectoryServices.ActiveDirectory.Domain]::GetDomain($domContext).GetDirectoryEntry()
 $Search = [adsisearcher]$LDAP
@@ -32,7 +32,6 @@ $Search.Filter = "(&(objectCategory=Computer)(name=$client))"
 $comp = $Search.FindAll()
 ## Select results and format
 $comp.Properties.'ms-mcs-admpwd'
-$passexp = "$([datetime]::FromFileTime([convert]::ToInt64($comp.Properties.'ms-mcs-admpwdexpirationtime',10)))"
-$passexp
+"$([datetime]::FromFileTime([convert]::ToInt64($comp.Properties.'ms-mcs-admpwdexpirationtime',10)))"
     }
 Check-LAPS
