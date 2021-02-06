@@ -21,14 +21,18 @@ need to install any addtional modules. There are two mandartory parramter requir
     )
 function Check-LAPS {
 
-    $domContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext("Domain", $domName)
-    $getdom = [System.DirectoryServices.ActiveDirectory.Domain]::GetDomain($domContext)
-    $root = $getdom.GetDirectoryEntry()
-    $Search = [adsisearcher]$root
-    $Search.Filter = "(&(objectCategory=Computer)(name=$client))"
-    $comp = $Search.FindAll()
-    $comp.Properties.'ms-mcs-admpwd'
-    $passexp = "$([datetime]::FromFileTime([convert]::ToInt64($comp.Properties.'ms-mcs-admpwdexpirationtime',10)))"
-    $passexp
+## Get domain deatils to be called in adsiserach
+$domContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext("Domain", $domName)
+$LDAP= [System.DirectoryServices.ActiveDirectory.Domain]::GetDomain($domContext).GetDirectoryEntry()
+$Search = [adsisearcher]$LDAP
+
+## Filtering result to only show required computer
+$Search.Filter = "(&(objectCategory=Computer)(name=$client))"
+## Return all objects for the required computer
+$comp = $Search.FindAll()
+## Select results and format
+$comp.Properties.'ms-mcs-admpwd'
+$passexp = "$([datetime]::FromFileTime([convert]::ToInt64($comp.Properties.'ms-mcs-admpwdexpirationtime',10)))"
+$passexp
     }
 Check-LAPS
