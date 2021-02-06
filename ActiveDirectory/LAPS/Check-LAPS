@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-LAPS script for checking remote doamin and local domains
+LAPS script for checking remote doamin
 
 .DESCRIPTION
 This script can be used for checking the local admin passwrod attribute on local and remote domain. This script will work without the
@@ -32,6 +32,6 @@ $Search.Filter = "(&(objectCategory=Computer)(name=$client))"
 $comp = $Search.FindAll()
 ## Select results and format
 $comp.Properties.'ms-mcs-admpwd'
-"$([datetime]::FromFileTime([convert]::ToInt64($comp.Properties.'ms-mcs-admpwdexpirationtime',10)))"
+"$([DateTime]::FromFileTime([Int64]::Parse($comp.Properties.'ms-mcs-admpwdexpirationtime')))"
     }
 Check-LAPS
