@@ -6,7 +6,10 @@ https://www.powershellgallery.com/packages/MSAL.PS/4.21.0.1
 The script is designed to work with certificates so this is a pre-req that Enterprise App for graph is setup, certificate is added and
 installed on the local client. 
 
-The script requires the follwoing details to be added 
+The script requires the following details to be added 
 TennantId (AzureAD) 
 ClientID (from the Enterprise app)
 ClientCert (Thumprint of the certficate that was uploaded to the Azure Enterprise app)
+
+To see how script is works and was created see the following blogpost. 
+https://thesleepyadmins.com/2021/02/27/microsoft-graph-filtering-results-powershell/
