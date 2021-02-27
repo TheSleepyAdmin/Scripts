@@ -18,14 +18,21 @@ ClientID (from the Enterprise app)
 ClientCert (Thumprint of the certficate that was uploaded to the Azure Enterprise app)
 
 .EXAMPLE
-GuestUserAuditGraph.ps1
+.\GuestUserAuditGraph.ps1 -TenantId "TenantId" -ClientId "ClientId" -CertThumbprint CertThumbprint
 #>
+
+param(
+[parameter(Mandatory=$true)]
+[string]$TenantId,
+[parameter(Mandatory=$true)]
+[String] $ClientId,
+[parameter(Mandatory=$true)]
+[String] $CertThumbprint
+)
 
 ## Get token to connect to Graph
 Import-Module MSAL.PS
-$TenantId = "TenantID"
-$ClientId = "AppID" 
-$ClientCert = Get-ChildItem "Cert:\currentuser\my\CertTumbprint"
+$ClientCert = Get-ChildItem "Cert:\currentuser\my\$CertThumbprint"
 $MSToken = Get-MsalToken -ClientId $ClientId -TenantId $TenantId -ClientCertificate $ClientCert
 
 ## Create result array and date variable
