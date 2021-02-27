@@ -11,5 +11,5 @@ TennantId (AzureAD)
 ClientID (from the Enterprise app)
 ClientCert (Thumprint of the certficate that was uploaded to the Azure Enterprise app)
 
-To see how script is works and was created see the following blogpost. 
+To see how the script works and was created see the following blogpost. 
 https://thesleepyadmins.com/2021/02/27/microsoft-graph-filtering-results-powershell/
