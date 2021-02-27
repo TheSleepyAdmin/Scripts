@@ -64,6 +64,7 @@ $Properties = @{
 GuestUser = $user.userPrincipalName
 GuestExternalEmail = $user.mail
 Active = "Guest Active in Last 30 Days"
+IPAddress = $Logins[0].ipAddress
 LastActiveSigninDate = $Logins[0].createdDateTime
 LastAccessResource = $Logins[0].resourceDisplayName
 TokenIssuerType = $Logins[0].tokenIssuerType
@@ -80,6 +81,7 @@ $Properties = @{
 GuestUser = $user.userPrincipalName
 GuestExternalEmail = $user.mail
 Active = "Guest has not been Active in Last 30 days"
+IPAddress = "N/A"
 LastActiveSigninDate = "N/A"
 LastAccessResource = "N/A"
 TokenIssuerType = "N/A"
@@ -92,4 +94,4 @@ $Results += New-Object psobject -Property $properties
 }
 
 ## Format results 
-$results | Select-Object GuestExternalEmail,GuestUser,Active,LastActiveSigninDate,LastAccessResource,TokenIssuerType,GroupMembership
+$results | Select-Object GuestExternalEmail,GuestUser,Active,IPAddress,LastActiveSigninDate,LastAccessResource,TokenIssuerType,GroupMembership
