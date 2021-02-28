@@ -53,8 +53,8 @@ $Logins = (Invoke-RestMethod -Headers @{Authorization = "Bearer $($MSToken.Acces
 Select-Object userPrincipalName,ipAddress,tokenIssuerType,resourceDisplayName,createdDateTime
 
 ## Checking guest user group membership 
-$GuestsUrl = "https://graph.microsoft.com/beta/users/$($User.ID)/memberof"
-$Groups = (Invoke-RestMethod -Headers @{Authorization = "Bearer $($MSToken.AccessToken)"} -Uri $GuestsUrl -Method Get).value |
+$GroupsUrl = "https://graph.microsoft.com/beta/users/$($User.ID)/memberof"
+$Groups = (Invoke-RestMethod -Headers @{Authorization = "Bearer $($MSToken.AccessToken)"} -Uri $GroupsUrl -Method Get).value |
 Select-Object displayName | Group-Object displayName
 
 ## Create hash table for guest user with sign-in logs
