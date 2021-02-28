@@ -19,6 +19,9 @@ ClientCert (Thumprint of the certficate that was uploaded to the Azure Enterpris
 
 .EXAMPLE
 .\GuestUserAuditGraph.ps1 -TenantId "TenantId" -ClientId "ClientId" -CertThumbprint CertThumbprint
+
+.EXAMPLE
+.\GuestUserAuditGraph.ps1 -TenantId "TenantId" -ClientId "ClientId" -CertThumbprint CertThumbprint -Exportpath C:\temp 
 #>
 
 param(
@@ -27,7 +30,8 @@ param(
 [parameter(Mandatory=$true)]
 [String] $ClientId,
 [parameter(Mandatory=$true)]
-[String] $CertThumbprint
+[String] $CertThumbprint,
+[String] $Exportpath
 )
 
 ## Get token to connect to Graph
@@ -57,9 +61,10 @@ $GroupsUrl = "https://graph.microsoft.com/beta/users/$($User.ID)/memberof"
 $Groups = (Invoke-RestMethod -Headers @{Authorization = "Bearer $($MSToken.AccessToken)"} -Uri $GroupsUrl -Method Get).value |
 Select-Object displayName | Group-Object displayName
 
-## Create hash table for guest user with sign-in logs
+## loop through Guest users
 if ($Logins){
 
+## Create hash table for guest user with sign-in logs
 $Properties = @{
 GuestUser = $user.userPrincipalName
 GuestExternalEmail = $user.mail
@@ -68,7 +73,7 @@ IPAddress = $Logins[0].ipAddress
 LastActiveSigninDate = $Logins[0].createdDateTime
 LastAccessResource = $Logins[0].resourceDisplayName
 TokenIssuerType = $Logins[0].tokenIssuerType
-GroupMembership = $Groups.Name
+GroupMembership =  if($Groups) {$Groups.Name -join ","} else{"No Group Membership"}
 }
 
 ## Add results to the results array
@@ -85,7 +90,7 @@ IPAddress = "N/A"
 LastActiveSigninDate = "N/A"
 LastAccessResource = "N/A"
 TokenIssuerType = "N/A"
-GroupMembership = $Groups.Name
+GroupMembership = if($Groups) {$Groups.Name -join ","} else{"No Group Membership"}
     }
 
 ## Add results to the results array
@@ -93,5 +98,14 @@ $Results += New-Object psobject -Property $properties
     }
 }
 
+## Export results to CSV
+if ($Exportpath){
+## Format results 
+$results | Select-Object GuestExternalEmail,GuestUser,Active,IPAddress,LastActiveSigninDate,LastAccessResource,TokenIssuerType,GroupMembership | 
+Export-Csv $Exportpath\GuestUserAuditReport_$Date.csv -NoTypeInformation
+}
+
+else {
 ## Format results 
 $results | Select-Object GuestExternalEmail,GuestUser,Active,IPAddress,LastActiveSigninDate,LastAccessResource,TokenIssuerType,GroupMembership
+}
