@@ -1,6 +1,7 @@
 <#
 .SYNOPSIS
 Script to list all share on a remote system and export folder permission
+
 .DESCRIPTION
 This Script is used to check for all shares on the specified servers and to export folder permission, the default shares like Admin$ and c$ 
 are excluded from this script. 
@@ -40,9 +41,12 @@ $FolderPath =  "\\$Server\$share"
 
 Write-Warning "Checking permissions $($FolderPath)"
 
+## Get Root Folder Permissions
+$Folders = @(Get-Item -Path $FolderPath | Select-Object Name,FullName,LastWriteTime,Length)
+
 ## Get Folders
 $error.clear()
-$Folders = Get-ChildItem -Path $FolderPath -Directory |  Select-Object Name,FullName,LastWriteTime,Length -ErrorAction SilentlyContinue
+$Folders += Get-ChildItem -Path $FolderPath -Directory |  Select-Object Name,FullName,LastWriteTime,Length -ErrorAction SilentlyContinue
 foreach ($err in $Error) {
 $err.Exception.Message | Out-File $ExportPath\AccessDenied.txt -Append
 }
