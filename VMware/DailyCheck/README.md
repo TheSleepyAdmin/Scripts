@@ -1,4 +1,4 @@
-This is script is used to geneate a HTML report for the the following daily checks we current run in our VMware environment. 
+This is script is used to generate a HTML report for the the following daily checks we current run in our VMware environment. 
 
 vCenter connection
 VMware tools check
