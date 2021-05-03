@@ -6,9 +6,10 @@ WeeklyAD Audit report
 This report is used to report on all GPO that have been created or modified in the last 7 day's, AD Objects created in the last 7 day's,
 AD Objects deleted in the last 7 day's and Account that are due to expire in the next 7 day's
 
+There are two pre requisites for script to run. The Group policy managment module needs to be install and the AD managment module
+
 .EXAMPLE
 .\WeeklyAD_AuditReport_V1.ps1 -exportPath c:\Temp\AD_Audit\ -domains domian.local
-
 .EXAMPLE
 .\WeeklyAD_AuditReport_V1.ps1 -SMTPServer mailserver.domain.local -toAddress administrator@domain.local -FromAddress ADreport@domain.local -exportPath c:\Temp\AD_Audit\ -domains domian.local
 
