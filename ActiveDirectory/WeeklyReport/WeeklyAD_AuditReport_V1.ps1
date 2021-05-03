@@ -7,6 +7,9 @@ This report is used to report on all GPO that have been created or modified in t
 AD Objects deleted in the last 7 day's and Account that are due to expire in the next 7 day's
 
 .EXAMPLE
+.\WeeklyAD_AuditReport_V1.ps1 -exportPath c:\Temp\AD_Audit\ -domains domian.local
+
+.EXAMPLE
 .\WeeklyAD_AuditReport_V1.ps1 -SMTPServer mailserver.domain.local -toAddress administrator@domain.local -FromAddress ADreport@domain.local -exportPath c:\Temp\AD_Audit\ -domains domian.local
 
  .EXAMPLE
@@ -14,11 +17,11 @@ AD Objects deleted in the last 7 day's and Account that are due to expire in the
 #>
 
 param(
-    [parameter(Mandatory)]
+    [parameter]
     [String]$SMTPServer,
-    [parameter(Mandatory)]
-    [String]$toAddress,
-    [parameter(Mandatory)]
+    [parameter]
+    [String[]]$toAddress,
+    [parameter]
     [String]$FromAddress,
     [parameter(Mandatory)]
     [String]$exportPath,
@@ -65,6 +68,8 @@ Select-Object -Property SamAccountName, AccountExpirationDate | Export-Csv $expo
 ## Get csv to be attached to Mail
 $reportAttachment = Get-ChildItem "$exportPath*.csv"
 
+if ($SMTPServer){
 ## Send Email report 
 Send-MailMessage -From $FromAddress -To $toaddress.Split(',') -Subject "Weekly Domain Reports"`
 -Body "Attached is the weekly Domain reports."  -SmtpServer $SMTPServer -Attachments $reportAttachment
+}
