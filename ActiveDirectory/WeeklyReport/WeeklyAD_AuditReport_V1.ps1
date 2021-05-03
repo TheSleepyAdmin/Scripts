@@ -19,11 +19,11 @@ There are two pre requisites for script to run. The Group policy managment modul
 #>
 
 param(
-    [parameter]
+    [parameter(Mandatory = $false)]
     [String]$SMTPServer,
-    [parameter]
+    [parameter(Mandatory = $false)]
     [String[]]$toAddress,
-    [parameter]
+    [parameter(Mandatory = $false)]
     [String]$FromAddress,
     [parameter(Mandatory)]
     [String]$exportPath,
