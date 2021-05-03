@@ -10,6 +10,7 @@ There are two pre requisites for script to run. The Group policy managment modul
 
 .EXAMPLE
 .\WeeklyAD_AuditReport_V1.ps1 -exportPath c:\Temp\AD_Audit\ -domains domian.local
+
 .EXAMPLE
 .\WeeklyAD_AuditReport_V1.ps1 -SMTPServer mailserver.domain.local -toAddress administrator@domain.local -FromAddress ADreport@domain.local -exportPath c:\Temp\AD_Audit\ -domains domian.local
 
