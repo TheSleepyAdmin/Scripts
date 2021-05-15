@@ -59,5 +59,5 @@ $results += New-Object PSObject -Property $props
         }
     }
 
-## Export restuls
+## Export results
 $results | Export-Csv "$ExportPath\MFA_User_Report.csv" -NoTypeInformation
