@@ -17,7 +17,7 @@
 # Mandatory Variables Vcenter Server and export path
 # 
 #.EXAMPLE
-# .\VMwareReport.ps1 -VCServer vc.domain.local -ReportExport c:\temp
+# .\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
 #
 # ------------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ $RolesPermissions = Get-VIPermission
 foreach ($RolesPermission in $RolesPermissions)
 {
 
-##
+
 Write-Host "checking Permmission $($RolesPermission.Principal)" -ForegroundColor Green
 
 ## Get Role
