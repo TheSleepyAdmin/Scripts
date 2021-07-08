@@ -78,6 +78,7 @@ $Object = "User"
 
 ## Results Hash table
 $props = @{
+Account = $RolesPermission.Principal
 Assigment = $RolesPermission.Entity
 Role = $RolesPermission.Role
 ObjectType = $Object
@@ -91,7 +92,7 @@ $results += New-Object psobject -Property $props
 }
 
 ## Export Results To CSV file
-$results | Select-Object Assigment,Role,ObjectType,Propagate,SystemRole,AssignedPrivilege | 
+$results | Select-Object Account,Assigment,Role,ObjectType,Propagate,SystemRole,AssignedPrivilege | 
 Export-Csv $ReportExport\$VCServer-PermissionsExport.csv -NoTypeInformation
 }
 Disconnect-VIServer -Confirm:$false
