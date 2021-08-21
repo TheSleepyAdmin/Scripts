@@ -4,7 +4,7 @@ VMware Daily Check Report:
 Script is used to run daily health Check for Snapshots, VMware Tools, Datastore Below 20%, Vcenter, Host and VM Alarms.
 
 Author: TheSleepyAdmin
-Version: 1.0
+Version: 1.1
 
 .DESCRIPTION
  This script needs to be run on with either VMware PowerCli snappin or module and an
@@ -167,7 +167,7 @@ if ($VMwareToolsReport) {
 $vmToolsReport = $VMwareToolsReport | ConvertTo-HTML -Fragment -PreContent "<h2>VMwareTools Report</h2>"
 }
 else {
-$vmToolsReport = "No VM's With Out Of Date VMware Tools"
+$vmToolsReport = "<h2>VMwareTools Report</h2>" + "No VM's With Out Of Date VMware Tools"
 }
 
 ## Snapshots Older than three days
@@ -186,15 +186,18 @@ $VMHAlarmReport = @()
 $VMHostStatus = (Get-VMHost | Get-View) | Select-Object Name,OverallStatus,ConfigStatus,TriggeredAlarmState
 $HostErrors= $VMHostStatus  | Where-Object {$_.OverallStatus -ne "Green" -and $_.TriggeredAlarmState -ne $null} 
 if ($HostErrors){
-foreach($alarm in $HostErrors.TriggeredAlarmState){
+foreach ($hosterror in $HostErrors){
+foreach($alarm in $HostError.TriggeredAlarmState){
 $Hprops = @{
-Host = $HostErrors.Name
-OverAllStatus = $HostErrors.OverallStatus
+Host = $HostError.Name
+OverAllStatus = $HostError.OverallStatus
 TriggeredAlarms = (Get-AlarmDefinition -Id $alarm.alarm).Name
 }
-$VMHAlarmReport += New-Object PSObject -Property $Hprops
+[array]$VMHAlarmReport += New-Object PSObject -Property $Hprops
 }
 }
+}
+
 if ($VMHAlarmReport){
 $VMHAlarms = $VMHAlarmReport | Select-Object Host,OverAllStatus,TriggeredAlarms | ConvertTo-HTML -Fragment -PreContent "<h2>VMHost Alerts</h2>" 
 }
@@ -208,15 +211,18 @@ $VMAlarmReport = @()
 $VMStatus = (Get-VM | Get-View) | Select-Object Name,OverallStatus,ConfigStatus,TriggeredAlarmState
 $VMErrors = $VMStatus  | Where-Object {$_.OverallStatus -ne "Green"}
 if ($VMErrors) {
-foreach ($TriggeredAlarm in $VMErrors.TriggeredAlarmstate) {
+foreach ($VMError in $VMErrors){
+foreach ($TriggeredAlarm in $VMError.TriggeredAlarmstate) {
 $VMprops = @{
-VM = $VMErrors.Name
-OverAllStatus = $VMErrors.OverallStatus
+VM = $VMError.Name
+OverAllStatus = $VMError.OverallStatus
 TriggeredAlarms = (Get-AlarmDefinition -Id $TriggeredAlarm.Alarm).Name
 }
-$VMAlarms += New-Object PSObject -Property $VMprops
+[array]$VMAlarms += New-Object PSObject -Property $VMprops
 }
 }
+}
+
 if ($VMAlarms){
 $VMAlarmReport = $VMAlarms | ConvertTo-HTML -Fragment -PreContent "<h2>VM Alerts</h2>" 
 }
