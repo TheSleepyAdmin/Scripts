@@ -238,7 +238,7 @@ Where-Object {$_ -is [VMware.Vim.AlarmStatusChangedEvent] -and ($_.To -match "re
 ($_.FullFormattedMessage -notlike "*Virtual machine*")`
 -and ($_.CreatedTime -gt $VCEventDate)}
 if ($VCAlerts) {
-$ActiveVCAlert = $VCAlerts | Select-Object @{N="vCenter Events";E={$_.FullFormattedMessage}},CreatedTime | 
+$ActiveVCAlert = $VCAlerts | Select-Object @{N="vCenter Events";E={$_.FullFormattedMessage}},CreatedTime | Sort-Object -Property CreatedTime -Descending | 
 ConvertTo-Html -Fragment -PreContent "<h2>vCenter Alerts</h2>"
 }
 else
