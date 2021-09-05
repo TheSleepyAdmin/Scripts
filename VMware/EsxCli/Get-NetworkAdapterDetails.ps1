@@ -15,7 +15,7 @@ Install-Module -Name VMware.PowerCLI –Scope CurrentUser
 The ReportExport parameter is an optional paramter to export the report to a csv
 
 .EXAMPLE
-.\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
+.\Get-NetworkAdapterDetails -ReportExport c:\temp
 
 .NOTES
 THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED “AS IS” WITHOUT
