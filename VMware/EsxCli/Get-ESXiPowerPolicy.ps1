@@ -9,12 +9,18 @@
 # Author: Geoff Phillis 
 # Version: 1.0
 #------------------------------------------------------------------------------ 
-# VMware NetworkAdapter Details
-# Tested with Powercli 12.0 and above. Requires Powercli install
+# VMware Power Policy Report and configuration update
+# Tested with Powercli 12.0 and above. Requires Powercli install to be 
 # on computer running script. 
 #  
 # ------------------------------------------------------------------------------ 
-# Mandatory Variables Vcenter Server and export path
+# There are no mandatory varialbed
+#
+# Use -ReportOnly to return the current Power policy to the PowerShell console
+#
+# Use -ReportOnly and -ReportExport to out put the reprot to a csv
+#
+# Use -SetPolicy to update the active power policy setting
 # 
 #.EXAMPLE
 # .\Get-ESXiPowerPolicy -ReportOnly
