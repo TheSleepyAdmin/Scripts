@@ -17,7 +17,7 @@
 # Mandatory Variables Vcenter Server and export path
 # 
 #.EXAMPLE
-# .\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
+# .\Get-NetworkAdapterDetails -ReportExport c:\temp
 #
 # ------------------------------------------------------------------------------
 
