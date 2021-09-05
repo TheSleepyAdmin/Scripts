@@ -17,13 +17,13 @@
 # Mandatory Variables Vcenter Server and export path
 # 
 #.EXAMPLE
-# .\Get-ESXiPowerPlan -ReportOnly
+# .\Get-ESXiPowerPolicy -ReportOnly
 #
 #.EXAMPLE
-#.\Get-ESXiPowerPlan -ReportOnly -ReportExport c:\temp
+#.\Get-ESXiPowerPolicy -ReportOnly -ReportExport c:\temp
 #
 #.EXAMPLE
-#.\Get-ESXiPowerPlan -Setplan 
+#.\Get-ESXiPowerPolicy -SetPolicy 
 # ------------------------------------------------------------------------------
 
 param(
@@ -32,7 +32,7 @@ param(
     [parameter(Mandatory = $false)]
     [string]$ReportExport,
     [parameter(Mandatory = $false)]
-    [string]$Setplan
+    [string]$SetPolicy
     )
 
 ## Get date to add to report export
@@ -46,39 +46,39 @@ foreach ($vmhost in $vmhosts){
 ## Retrieve EsxCli information
 $vmhostesxcli = Get-EsxCli -VMHost $vmhost -V2
 
-## Retrieve PowerPlan settings
-$PowerPlan = $vmhostesxcli.hardware.Power.policy.get.invoke()
+## Retrieve PowerPolicy settings
+$PowerPolicy = $vmhostesxcli.hardware.Power.policy.get.invoke()
 
 ## checks if the set ReportOnly paramter is set and ReportExport is not set
 if ($ReportOnly -and !$ReportExport){
 
-## Get PowerPlan details and exports to the PowerShell console
-$PowerPlan | Select-Object @{N="VMHost";E={$($vmhost)}},@{N="Name";E={$PowerPlan.Name}},
-@{N="Id";E={$PowerPlan.Id}},@{N="ShortName";E={$PowerPlan.ShortName}}
+## Get PowerPolicy details and exports to the PowerShell console
+$PowerPolicy | Select-Object @{N="VMHost";E={$($vmhost)}},@{N="Name";E={$PowerPolicy.Name}},
+@{N="Id";E={$PowerPolicy.Id}},@{N="ShortName";E={$PowerPolicy.ShortName}}
     
 }
 
 ## checks if the set ReportExport paramter is set
 if ($ReportExport){
 
-## Get PowerPlan details and exports to a csv
-$PowerPlan | Select-Object @{N="VMHost";E={$($vmhost)}},@{N="Name";E={$PowerPlan.Name}},
-@{N="Id";E={$PowerPlan.Id}},@{N="ShortName";E={$PowerPlan.ShortName}} | 
-Export-Csv $ReportExport\PowerPlanReport_$date.csv -Append -NoTypeInformation
+## Get PowerPolicy details and exports to a csv
+$PowerPolicy | Select-Object @{N="VMHost";E={$($vmhost)}},@{N="Name";E={$PowerPolicy.Name}},
+@{N="Id";E={$PowerPolicy.Id}},@{N="ShortName";E={$PowerPolicy.ShortName}} | 
+Export-Csv $ReportExport\PowerPolicyReport_$date.csv -Append -NoTypeInformation
     
 }
 
-## checks if the set powerplan paramter is selected
-if ($Setplan){
+## checks if the set powerPolicy paramter is selected
+if ($SetPolicy){
 
-if ($PowerPlan -ne $Setplan){
+## Check if Power Policy is already set to correct Id
+if ($PowerPolicy.Id -ne $SetPolicy){
 
-## Update PowerPlan to set Id
-$vmhostesxcli.hardware.Power.policy.set.Invoke(@{id=$("$Setplan")})
-
+## Update PowerPolicy to set Id
+$vmhostesxcli.hardware.Power.policy.set.Invoke(@{id=$("$SetPolicy")})
 }
 else{
-Write-Warning "Host PowerPlan is already set"
+Write-Warning "Host PowerPolicy is already set"
 }
 
 }
