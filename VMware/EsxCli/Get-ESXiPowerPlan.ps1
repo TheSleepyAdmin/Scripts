@@ -32,7 +32,7 @@ param(
     [parameter(Mandatory = $false)]
     [string]$ReportExport,
     [parameter(Mandatory = $false)]
-    [switch]$Setplan
+    [string]$Setplan
     )
 
 ## Get date to add to report export
@@ -50,7 +50,7 @@ $vmhostesxcli = Get-EsxCli -VMHost $vmhost -V2
 $PowerPlan = $vmhostesxcli.hardware.Power.policy.get.invoke()
 
 ## checks if the set ReportOnly paramter is set and ReportExport is not set
-if ($ReportOnly-and !$ReportExport){
+if ($ReportOnly -and !$ReportExport){
 
 ## Get PowerPlan details and exports to the PowerShell console
 $PowerPlan | Select-Object @{N="VMHost";E={$($vmhost)}},@{N="Name";E={$PowerPlan.Name}},
@@ -71,8 +71,15 @@ Export-Csv $ReportExport\PowerPlanReport_$date.csv -Append -NoTypeInformation
 ## checks if the set powerplan paramter is selected
 if ($Setplan){
 
+if ($PowerPlan -ne $Setplan){
+
 ## Update PowerPlan to set Id
-$vmhostesxcli.hardware.Power.policy.set.Invoke(@{id=$($Setplan)})
+$vmhostesxcli.hardware.Power.policy.set.Invoke(@{id=$("$Setplan")})
+
+}
+else{
+Write-Warning "Host PowerPlan is already set"
+}
 
 }
 
