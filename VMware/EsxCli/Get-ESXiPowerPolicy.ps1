@@ -1,21 +1,33 @@
 <#
 .SYNOPSIS
-VMware NetworkAdapter Details
+VMware Power Policy Report and configuration update
 Author: Geoff Phillis
 Version: 1.0
 
 .DESCRIPTION
-VMware NetworkAdapter Details
+VMware Power Policy Report and configuration update for ESXi Power policy
 Tested with Powercli 12.0 and above. Requires Powercli install
 To install PowerCli module run
 Install-Module -Name VMware.PowerCLI
 Install-Module -Name VMware.PowerCLI –Scope CurrentUser
 
+.PARAMETER ReportOnly
+Use -ReportOnly to return the current Power policy to the PowerShell console
+
 .PARAMETER ReportExport
-The ReportExport parameter is an optional paramter to export the report to a csv
+-ReportOnly and -ReportExport to out put the reprot to a csv
+
+.PARAMETER SetPolicy
+Use -SetPolicy to update the active power policy setting
 
 .EXAMPLE
-.\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
+.\Get-ESXiPowerPolicy -ReportOnly
+
+.EXAMPLE
+.\Get-ESXiPowerPolicy -ReportOnly -ReportExport c:\temp
+
+.EXAMPLE
+.\Get-ESXiPowerPolicy -SetPolicy 1
 
 .NOTES
 THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED “AS IS” WITHOUT
