@@ -23,7 +23,7 @@
 #.\Get-ESXiPowerPolicy -ReportOnly -ReportExport c:\temp
 #
 #.EXAMPLE
-#.\Get-ESXiPowerPolicy -SetPolicy 
+#.\Get-ESXiPowerPolicy -SetPolicy 1
 # ------------------------------------------------------------------------------
 
 param(
