@@ -1,36 +1,29 @@
-#------------------------------------------------------------------------------ 
-# THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED "AS IS� WITHOUT 
-# WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT 
-# LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS 
-# FOR A PARTICULAR PURPOSE. THE ENTIRE RISK OF USE, INABILITY TO USE, OR  
-# RESULTS FROM THE USE OF THIS CODE REMAINS WITH THE USER. 
-# 
-#------------------------------------------------------------------------------ 
-# Author: Geoff Phillis 
-# Version: 1.0
-#------------------------------------------------------------------------------ 
-# VMware Power Policy Report and configuration update
-# Tested with Powercli 12.0 and above. Requires Powercli install to be 
-# on computer running script. 
-#  
-# ------------------------------------------------------------------------------ 
-# There are no mandatory varialbed
-#
-# Use -ReportOnly to return the current Power policy to the PowerShell console
-#
-# Use -ReportOnly and -ReportExport to out put the reprot to a csv
-#
-# Use -SetPolicy to update the active power policy setting
-# 
-#.EXAMPLE
-# .\Get-ESXiPowerPolicy -ReportOnly
-#
-#.EXAMPLE
-#.\Get-ESXiPowerPolicy -ReportOnly -ReportExport c:\temp
-#
-#.EXAMPLE
-#.\Get-ESXiPowerPolicy -SetPolicy 1
-# ------------------------------------------------------------------------------
+<#
+.SYNOPSIS
+VMware NetworkAdapter Details
+Author: Geoff Phillis
+Version: 1.0
+
+.DESCRIPTION
+VMware NetworkAdapter Details
+Tested with Powercli 12.0 and above. Requires Powercli install
+To install PowerCli module run
+Install-Module -Name VMware.PowerCLI
+Install-Module -Name VMware.PowerCLI –Scope CurrentUser
+
+.PARAMETER ReportExport
+The ReportExport parameter is an optional paramter to export the report to a csv
+
+.EXAMPLE
+.\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
+
+.NOTES
+THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED “AS IS” WITHOUT
+WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+FOR A PARTICULAR PURPOSE. THE ENTIRE RISK OF USE, INABILITY TO USE, OR
+RESULTS FROM THE USE OF THIS CODE REMAINS WITH THE USER.
+#>
 
 param(
     [parameter(Mandatory = $false)]
