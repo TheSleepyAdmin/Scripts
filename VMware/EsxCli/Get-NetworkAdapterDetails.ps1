@@ -14,7 +14,8 @@
 # on computer running script. 
 #  
 # ------------------------------------------------------------------------------ 
-# Mandatory Variables Vcenter Server and export path
+# There are no Mandatory parameters only paramter is for reportexport path to
+# export the report to a csv
 # 
 #.EXAMPLE
 # .\Get-NetworkAdapterDetails -ReportExport c:\temp
