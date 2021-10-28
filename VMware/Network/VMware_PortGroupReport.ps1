@@ -19,7 +19,7 @@ Mandatory Variable for VMware vCenter server.
 Mandatory Variables for Export location.
 
 .EXAMPLE
-.\VMware_PortGroupReport.ps1 -VCServer lab-vc.thesleepyadmin.local -ConsoleOnly
+.\VMware_PortGroupReport.ps1 -VCServer vcenter.domain.local -ConsoleOnly
 
 .EXAMPLE
  .\VMware_PortGroupReport.ps1 -VCServer VcenterServer -ReportExport c:\temp
