@@ -22,7 +22,7 @@ Mandatory Variables for Export location.
 .\VMware_PortGroupReport.ps1 -VCServer vcenter.domain.local -ConsoleOnly
 
 .EXAMPLE
- .\VMware_PortGroupReport.ps1 -VCServer VcenterServer -ReportExport c:\temp
+ .\VMware_PortGroupReport.ps1 -VCServer vcenter.domain.local -ReportExport c:\temp
 
 .NOTES
 THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED “AS IS” WITHOUT
