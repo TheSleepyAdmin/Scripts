@@ -1,25 +1,33 @@
-#------------------------------------------------------------------------------ 
-# THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED "AS IS� WITHOUT 
-# WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT 
-# LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS 
-# FOR A PARTICULAR PURPOSE. THE ENTIRE RISK OF USE, INABILITY TO USE, OR  
-# RESULTS FROM THE USE OF THIS CODE REMAINS WITH THE USER. 
-# 
-#------------------------------------------------------------------------------ 
-# Author: Geoff Phillis 
-# Version: 1.0
-#------------------------------------------------------------------------------ 
-# VMware Permission Audit Report
-# Tested with Powercli 12.0 and above. Requires Powercli install
-# on computer running script. 
-#  
-# ------------------------------------------------------------------------------ 
-# Mandatory Variables Vcenter Server and export path
-# 
-#.EXAMPLE
-# .\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
-#
-# ------------------------------------------------------------------------------
+<#
+.SYNOPSIS
+VMware Permission Audit Report
+This script is used to get all permissions assinged in VMware vCenter
+Author: Geoff Phillis
+Version: 1.0
+
+.DESCRIPTION
+ This script needs to be run on with either VMware PowerCli snappin or module and an
+ account that has appropriate rights to connecting using Powercli
+ To install PowerCli module run
+ Install-Module -Name VMware.PowerCLI
+ Install-Module -Name VMware.PowerCLI –Scope CurrentUser
+ 
+.PARAMETER VCServer
+Mandatory Variable for VMware vCenter server.
+
+.PARAMETER ReportExport 
+Mandatory Variables for Export location.
+
+.EXAMPLE
+.\VMware_Permissions_Audit.ps1 -VCServer vc.domain.local -ReportExport c:\temp
+
+.NOTES
+THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED “AS IS” WITHOUT
+WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+FOR A PARTICULAR PURPOSE. THE ENTIRE RISK OF USE, INABILITY TO USE, OR
+RESULTS FROM THE USE OF THIS CODE REMAINS WITH THE USER.
+#>
 
 ## VMware vCenter and export path paramters
 param(
