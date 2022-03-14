@@ -4,7 +4,7 @@ Office365 MFA Report
 
 .DESCRIPTION
 This script is used to report on all users MFA status in Office365. The following properties are exported 
-DisplayName, UPN, AssingedLicence, Licensed, DefualtMethod, MFA Enabled
+DisplayName, UPN, AssingedLicence, Licensed, DefaultMethod, MFA Enabled
 
 .EXAMPLE
 .\Office365_MFA_Report.ps1 -ExportPath C:\Temp\
@@ -32,7 +32,7 @@ $props = @{
 DisplayName = $user.DisplayName
 UPN = $user.UserPrincipalName
 "MFA Enabled" = "True"
-DefualtMethod = $user.StrongAuthenticationMethods | Where-Object {$_.IsDefault -eq "True"} | Select-Object MethodType -ExpandProperty MethodType
+DefaultMethod = $user.StrongAuthenticationMethods | Where-Object {$_.IsDefault -eq "True"} | Select-Object MethodType -ExpandProperty MethodType
 Licensed  = $user.IsLicensed
 AssingedLicence = if($user.Licenses.AccountSkuId){$user.Licenses.AccountSkuId -join ","} else {"No Licence Assigned"}
 }
@@ -49,7 +49,7 @@ $props = @{
 DisplayName = $user.DisplayName
 UPN = $user.UserPrincipalName
 "MFA Enabled" = "False"
-DefualtMethod = "N/A"
+DefaultMethod = "N/A"
 Licensed  = $user.IsLicensed
 AssingedLicence = if($user.Licenses.AccountSkuId){$user.Licenses.AccountSkuId -join ","} else {"No Licence Assigned"}
 }
