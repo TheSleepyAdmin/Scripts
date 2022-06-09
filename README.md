@@ -5,7 +5,7 @@
   
 <h3 align="left">This code and any associated information are provided "as is without Warranty of any kind, the entire risk of use, inability to use, or  Results from the use of this code remains with the user.</h3>
 
-- 📝 I regularly write articles on [https://thesleepyadmins.com/](https://thesleepyadmins.com/)
+- 📝 I regularly write blogs at [https://thesleepyadmins.com/](https://thesleepyadmins.com/)
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
