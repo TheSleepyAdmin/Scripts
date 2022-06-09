@@ -14,3 +14,6 @@
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> <a href="https://azure.microsoft.com/en-in/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" alt="azure" width="40" height="40"/> </a> </p>
+
+<p align="left"> <a href="https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2" target="_blank" rel="noreferrer"> <img 
+src="https://docs.microsoft.com/en-us/powershell/media/index/powershell_128.svg" alt="azure" width="40" height="40"/> </a> </p>
