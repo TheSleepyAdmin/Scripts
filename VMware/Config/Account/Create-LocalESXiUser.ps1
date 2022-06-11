@@ -32,7 +32,7 @@ Mandatory Variables for new user account password
 Mandatory Variables for permission to be set on the new account
 
 .EXAMPLE
-.\Create-LocalESXiUser -ESXiHostList c:\temp\ESXiHosts.csv -ESXiUser root -ESXipass passwrod -ESXiNewUser monitoradin -ESXiUserPass Pass -ESXiPermission Administrator --Description "account decription"
+.\Create-LocalESXiUser -ESXiHostList c:\temp\ESXiHosts.csv -ESXiUser root -ESXipass passwrod -ESXiNewUser monitoradin -ESXiUserPass Pass -ESXiPermission Admin -Description "account decription"
 
 .NOTES
 THIS CODE AND ANY ASSOCIATED INFORMATION ARE PROVIDED “AS IS” WITHOUT
