@@ -1,14 +1,11 @@
 <#
 .SYNOPSIS
 Office365 MFA Report
-
 .DESCRIPTION
 This script is used to report on all users MFA status in Office365. The following properties are exported 
 DisplayName, UPN, AssingedLicence, Licensed, DefaultMethod, MFA Enabled
-
 .EXAMPLE
 .\Office365_MFA_Report.ps1 -ExportPath C:\Temp\
-
 #>
 param(
     [parameter(Mandatory)]
@@ -31,6 +28,7 @@ Write-Host "Authentcaion Method found for  $($user.UserPrincipalName)" -Foregrou
 $props = @{
 DisplayName = $user.DisplayName
 UPN = $user.UserPrincipalName
+PhoneNumber = $user.StrongAuthenticationUserDetails.PhoneNumber
 "MFA Enabled" = "True"
 DefaultMethod = $user.StrongAuthenticationMethods | Where-Object {$_.IsDefault -eq "True"} | Select-Object MethodType -ExpandProperty MethodType
 Licensed  = $user.IsLicensed
@@ -48,6 +46,7 @@ Write-Host "No Authentcaion Method found on $($user.UserPrincipalName)" -Foregro
 $props = @{
 DisplayName = $user.DisplayName
 UPN = $user.UserPrincipalName
+PhoneNumber = "N/A"
 "MFA Enabled" = "False"
 DefaultMethod = "N/A"
 Licensed  = $user.IsLicensed
@@ -60,4 +59,5 @@ $results += New-Object PSObject -Property $props
     }
 
 ## Export results
-$results | Export-Csv "$ExportPath\MFA_User_Report.csv" -NoTypeInformation
+$results | Select-Object DisplayName,UPN,PhoneNumber,"MFA Enabled",DefualtMethod,Licensed,AssingedLicence | 
+Export-Csv "$ExportPath\MFA_User_Report.csv" -NoTypeInformation
