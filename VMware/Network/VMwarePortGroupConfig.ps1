@@ -44,6 +44,9 @@ param(
 # Create results array
 $results = @()
 
+# Date variable
+$date = Get-Date -Format dd_MM_yyyy
+
 # Connect to vCenter Server
 Connect-VIServer $VCServer
 
@@ -102,7 +105,7 @@ if ($ReportExport){
   $results | Select-Object PortGroupName,VLAN,PortBinding,Num_Ports,VDSwitch,Load_Balancing,Failover_Detection,`
   NotifySwitches,EnableFailback,ActiveUplinkPort,StandbyUplinkPort,`
   AllowPromiscuous,MacChanges,ForgedTransmits,NetFlow | 
-  Export-Csv $ReportExport\VMwarePortGroup_ConfigExport.csv -NoTypeInformation
+  Export-Csv $ReportExport\VMwarePortGroup_ConfigExport_$date.csv -NoTypeInformation
   }
   
   else{
