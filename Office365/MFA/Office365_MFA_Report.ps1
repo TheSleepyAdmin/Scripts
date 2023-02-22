@@ -22,7 +22,7 @@ foreach ($user in $Users){
 ## Get user properties
 Write-Host "Checking $($user.UserPrincipalName) For strong authenticaiton" -ForegroundColor Green
 if($user.StrongAuthenticationMethods){
-Write-Host "Authentcaion Method found for  $($user.UserPrincipalName)" -ForegroundColor Yellow
+Write-Host "Authentication Method found for  $($user.UserPrincipalName)" -ForegroundColor Yellow
 
 ## Create report hash table
 $props = @{
@@ -40,7 +40,7 @@ $results += New-Object PSObject -Property $props
     }
 
 else {
-Write-Host "No Authentcaion Method found on $($user.UserPrincipalName)" -ForegroundColor red
+Write-Host "No Authentication Method found on $($user.UserPrincipalName)" -ForegroundColor red
 
 ## Create report hash table
 $props = @{
@@ -59,5 +59,5 @@ $results += New-Object PSObject -Property $props
     }
 
 ## Export results
-$results | Select-Object DisplayName,UPN,PhoneNumber,"MFA Enabled",DefualtMethod,Licensed,AssingedLicence | 
+$results | Select-Object DisplayName,UPN,PhoneNumber,"MFA Enabled",DefaultMethod,Licensed,AssingedLicence | 
 Export-Csv "$ExportPath\MFA_User_Report.csv" -NoTypeInformation
