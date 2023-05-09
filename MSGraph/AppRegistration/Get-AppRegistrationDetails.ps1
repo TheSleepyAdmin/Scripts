@@ -84,7 +84,9 @@ foreach ($Creds in $app.PasswordCredentials){
         SigninType = $app.SignInAudience
         StartDateTime = $Creds.StartDateTime
         EndDateTime = $Creds.EndDateTime
-        Expired = if ($Creds.EndDateTime -lt (Get-date).AddDays($ExpiryDate)){"Secret due to expiry in " + ($Creds.EndDateTime - (Get-Date)).Days + " days"} 
+        Expired = if ($Creds.EndDateTime -lt (Get-date)){"Secret has expired"} 
+        elseif ($Creds.EndDateTime -lt (Get-date).AddDays($ExpiryDate))
+        {"Secret due to expiry in " + ($Creds.EndDateTime - (Get-Date)).Days + " days"}
         else {"Secret is not due to expire in next $ExpiryDate days"}
         AuthType = "Client_Secret"
         }
@@ -107,7 +109,9 @@ foreach ($cert in $app.KeyCredentials){
         SigninType = $app.SignInAudience
         StartDateTime = $cert.StartDateTime
         EndDateTime = $cert.EndDateTime
-        Expired = if ($cert.EndDateTime -lt (Get-date).AddDays($ExpiryDate)){"Certificate due to expiry in " + ($cert.EndDateTime  - (Get-Date)).days + " days"} 
+        Expired = if ($Cert.EndDateTime -lt (Get-date)){"Certificate has expired"} 
+        elseif ($cert.EndDateTime -lt (Get-date).AddDays($ExpiryDate))
+        {"Certificate due to expiry in " + ($cert.EndDateTime  - (Get-Date)).days + " days"} 
         else {"Certificate is not due to expire in next $ExpiryDate days"}
         AuthType = "Certificate"
         }
