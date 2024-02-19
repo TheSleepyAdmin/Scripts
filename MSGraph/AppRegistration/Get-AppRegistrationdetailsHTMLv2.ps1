@@ -92,7 +92,7 @@ Connect-MgGraph @GraphDetails | Out-Null
 $results = @()
 
 ## Get Applications
-$apps = Get-MgApplication
+$apps = Get-MgApplication -All
 
 foreach ($app in $apps){
 
@@ -135,11 +135,11 @@ foreach ($cert in $app.KeyCredentials){
         SigninType = $app.SignInAudience
         StartDateTime = $cert.StartDateTime
         EndDateTime = $cert.EndDateTime
-        Expired = if ($Cert.EndDateTime -lt (Get-date)){"Certificate has expired"} 
+        Expired = if ($cert.EndDateTime -lt (Get-date)){"Certificate has expired"} 
         elseif ($cert.EndDateTime -lt (Get-date).AddDays($ExpiryRange)){"Certificate due to expire"} 
         else {"Certificate is not due to expire within date range"}
-        DaysToExpire = if ($Creds.EndDateTime -lt (Get-date)){"N/A"} 
-        elseif ($Creds.EndDateTime -lt (Get-date).AddDays($ExpiryRange)){($Creds.EndDateTime - (Get-Date)).Days}
+        DaysToExpire = if ($cert.EndDateTime -lt (Get-date)){"N/A"} 
+        elseif ($cert.EndDateTime -lt (Get-date).AddDays($ExpiryRange)){($cert.EndDateTime - (Get-Date)).Days}
         else {"N/A"}
         AuthType = "Certificate"
         }
