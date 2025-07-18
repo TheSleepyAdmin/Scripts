@@ -1,5 +1,5 @@
 $result = @()
-$Services = ("RpcLocator","SSDPSRV","icssvc","XboxGipSvc","XblAuthManager","XblGameSave","XboxNetApiSvc","dafsd")
+$services = @("RpcLocator","SSDPSRV","upnphost","WMPNetworkSvc","icssvc","XboxGipSvc","XblAuthManager","XblGameSave","XboxNetApiSvc")
 
 foreach ($service in $Services){
 
