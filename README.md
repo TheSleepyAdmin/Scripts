@@ -14,7 +14,6 @@
 <a href="https://twitter.com/TheSleepyAdmin" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="sleepyadmin" height="30" width="40" /></a>
 </p>
 
-![PowerShell](https://img.shields.io/badge/Language-PowerShell-blue)
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> <a href="https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2" target="_blank" rel="noreferrer"> <img 
 src="https://docs.microsoft.com/en-us/powershell/media/index/powershell_128.svg" alt="azure" width="40" height="40"/> </a> </p>
