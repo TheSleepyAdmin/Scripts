@@ -1,6 +1,8 @@
 <h1 align="left">Hi 👋, I'm TheSleepyAdmin</h1>
 <h3 align="left">I am a sysadmin that has an interest in automating task using PowerShell. </h3>
 
+![PowerShell](https://img.shields.io/badge/Language-PowerShell-blue)
+
 <h3 align="left">This repository is going to be used for hosting different script that I will be working on. These are all tested in my environment, but any script should be tested before running on any other environment.</h3>
   
 <h3 align="left">This code and any associated information are provided "as is without Warranty of any kind, the entire risk of use, inability to use, or  Results from the use of this code remains with the user.</h3>
